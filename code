@@ -2,6 +2,8 @@ from itertools import cycle
 from random import randrange
 from PIL import Image, ImageTk
 from tkinter import Canvas, Tk, messagebox, font
+import time
+from pygame import mixer
 
 canvas_width = 800
 canvas_height = 400
@@ -9,7 +11,9 @@ canvas_height = 400
 root = Tk()
 c: Canvas = Canvas(root, width=canvas_width, height=canvas_height, background="teal")
 c.pack()
-
+image = ImageTk.PhotoImage(file="chic.jpg")
+c.create_image(40,-80+59, anchor="nw",  image=image)
+c.pack()
 
 
 color_cycle = cycle(["light blue", "light green", "light pink", "light yellow", "light cyan"])
@@ -60,6 +64,10 @@ def egg_dropped(egg):
     c.delete(egg)
     lose_a_life()
     if lives_remaining == 0:
+        mixer.init()
+        beep = mixer.Sound("over.wav")
+        beep.play()
+        time.sleep(3)
         messagebox.showinfo("Game Over!", "Final Score: "+ str(score))
         root.destroy()
 
@@ -95,10 +103,13 @@ def move_right(event):
     if x2 < canvas_width:
         c.move(catcher, 20, 0)
 
+
 c.bind("<Left>", move_left)
 c.bind("<Right>", move_right)
 c.focus_set()
-root.after(1000, create_egg)
+root.after(700, create_egg)
 root.after(1000, move_eggs)
 root.after(1000, check_catch)
+
+
 root.mainloop()
