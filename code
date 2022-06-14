@@ -11,9 +11,7 @@ canvas_height = 400
 root = Tk()
 c: Canvas = Canvas(root, width=canvas_width, height=canvas_height, background="teal")
 c.pack()
-image = ImageTk.PhotoImage(file="chic.jpg")
-c.create_image(40,-80+59, anchor="nw",  image=image)
-c.pack()
+
 
 
 color_cycle = cycle(["light blue", "light green", "light pink", "light yellow", "light cyan"])
@@ -23,7 +21,7 @@ egg_score = 10
 egg_speed = 500
 egg_interval = 4000
 difficulty = 0.95
-catcher_color = "white"
+catcher_color = "black"
 catcher_width = 100
 catcher_height = 100
 catcher_startx = canvas_width / 2 - catcher_width / 2
@@ -110,6 +108,4 @@ c.focus_set()
 root.after(700, create_egg)
 root.after(1000, move_eggs)
 root.after(1000, check_catch)
-
-
 root.mainloop()
