@@ -1,2 +1,2 @@
 # egg_catcher
-egg catcher game using python and tikern library
+egg catcher game using python and tkinter library
